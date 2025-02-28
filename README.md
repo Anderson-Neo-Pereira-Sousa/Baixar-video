@@ -13,4 +13,7 @@ Antes de executar o projeto, instale as dependências necessárias:
 
 ```bash
 pip install streamlit yt-dlp
+```
+Para executar:
+```bash
 streamlit run app.py
