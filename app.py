@@ -2,7 +2,18 @@ import yt_dlp
 import streamlit as st 
 
 st.title("Baixar vídeos e áudios do YouTube") 
-urlDoVideo = st.text_input("Digite a URL do vídeo do YouTube") 
+urlDoVideo = st.text_input("Digite a URL do vídeo do YouTube")
+
+if urlDoVideo:
+    with yt_dlp.YoutubeDL({'quiet': True}) as ydl:
+        info = ydl.extract_info(urlDoVideo, download=False)
+        titulo = info.get('title', 'Vídeo sem título')
+        duracao = info.get('duration', 0)
+        thumbnail = info.get('thumbnail', '')
+
+        st.image(thumbnail, use_container_width=True)
+        st.write(f"🎬 **Título:** {titulo}")
+        st.write(f"⏳ **Duração:** {duracao // 60} min {duracao % 60} seg")
 
 col1, col2 = st.columns([1, 8])
 with col1:
